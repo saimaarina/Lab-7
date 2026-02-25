@@ -11,12 +11,16 @@ output: github_document
 library(tidyverse) 
 ```
 
+
+Looking at the visualization, I can see how misleading it is. First of all, the y-axes for both sides are on a different scale (the mask side goes from 15-25 while the no mask side goes from 14-4, and this is extremely confusing). Because of that, it is easy to think before actually diving deeper that mask-mandate counties may have shown a decrease in cases, but no mask-mandate counties did not seem to change (which can insinuate that not wearing a mask does not have consequences). If you actually look closer, you can see that there actually is a decrease in cases for the no mask-mandate counties. Also, this could all be avoided if the visualization was made with standards kept in mind, like the scale to be the same for both variables and a proper color legend to better discriminate between the two. 
+
 ### Exercise 1
 
-Remove this text, and add your answer for Exercise 1 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+```{r - loading file}
+library(readr)
+kansas_grouped_rolling_avg <- read_csv("kansas_grouped_rolling_avg.csv")
+View(kansas_grouped_rolling_avg)
+```
 
 ### Exercise 2
 
