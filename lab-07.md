@@ -91,3 +91,33 @@ differences in the number of cases that were notable in the no
 mask-mandate counties, while the decrease in cases for the mask-mandate
 counties are much clearer, showcasing their effect more strongly than in
 the original visual representation.
+
+### Exercise 4
+
+My new plot can honestly say that mask-mandate counties start and they
+stay at a slightly higher rolling average than the no-mandate counties,
+with no obvious patterns between them. WIth the new plot that has a
+shared y-axis, the main thing we can infer is difference in level (mask
+counties had more cases at baseline) and modest changes in trends. In
+relation to mask-wearing, this data doesn’t act as a clear demonstrator
+in support of mask mandates or not, but rather as information that can
+help support making these decisions (like how a mask mandate can help
+decrease virus spread, even if not strong). Something I know of mask
+mandates is that bigger areas and cities had them in effect because they
+started with a greater baseline of cases, unlike smaller counties with
+no mask-mandate in place, who started with a smaller amount of cases
+(due to confounding factors like smaller populations).
+
+### Exercise 5
+
+My accurate visualization suggests that mask‑mandate counties
+consistently had higher COVID‑19 case rates than no‑mandate counties
+over this time period, and that both groups show only modest decreases
+rather than dramatic divergence. In terms of the variables I used, I
+plotted date on the x‑axis and rolling_avg on the y‑axis, encoding
+mask_mandate as a color grouping (mask vs. no mask counties). For my
+scale, both county types share the same y‑axis range, so viewers can
+directly compare the height and slope of the two lines without being
+misled by different scales. Choosing to do a line chart helps emphasize
+how the case rates change over time and how the two groups change in
+relation to each other.
