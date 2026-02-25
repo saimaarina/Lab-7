@@ -26,7 +26,7 @@ proper color legend to better discriminate between the two.
 
 ``` r
 library(readr)
-kansas_grouped_rolling_avg <- read_csv("kansas_grouped_rolling_avg.csv")
+df <- read_csv("kansas_grouped_rolling_avg.csv")
 ```
 
     ## Rows: 46 Columns: 3
@@ -40,11 +40,54 @@ kansas_grouped_rolling_avg <- read_csv("kansas_grouped_rolling_avg.csv")
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
 ``` r
-View(kansas_grouped_rolling_avg)
+View(df)
 ```
 
 ### Exercise 2
 
-…
+``` r
+df %>% 
+  mutate(mask_group = if_else(mask_mandate == "Mask",
+                              "Mask mandate counties",
+                              "No mask mandate counties")) %>% 
+  ggplot(aes(x = date,
+             y = rolling_avg,
+             color = mask_group,
+             group = mask_group)) +
+  geom_line(size = 1.1) +
+  scale_color_manual(values = c("Mask mandate counties" = "red",
+                                "No mask mandate counties" = "blue"),
+                     name = "County type") +
+  labs(
+    x = "Date",
+    y = "7-day rolling average of new cases\n(per 100,000 residents)",
+    title = "COVID-19 case trends in Kansas counties\nwith vs. without mask mandates",
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "top",
+    panel.grid.minor = element_blank()
+  )
+```
 
-Add exercise headings as needed.
+    ## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+    ## ℹ Please use `linewidth` instead.
+    ## This warning is displayed once per session.
+    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+    ## generated.
+
+![](lab-07_files/figure-gfm/-%20enhanced%20and%20corrected%20visual-1.png)<!-- -->
+
+Looking at the data now that it is visually represented better, I can
+see how even my initial assumptions were wrong after I thought I looked
+closer, but it wasn’t close enough! It just makes no sense why the plot
+would be made the way it did when it could be made so much simpler, that
+is so frustrating!
+
+### Exercise 3
+
+In my visualization, it is way more clear that there were not really any
+differences in the number of cases that were notable in the no
+mask-mandate counties, while the decrease in cases for the mask-mandate
+counties are much clearer, showcasing their effect more strongly than in
+the original visual representation.
