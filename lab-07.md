@@ -121,3 +121,49 @@ directly compare the height and slope of the two lines without being
 misled by different scales. Choosing to do a line chart helps emphasize
 how the case rates change over time and how the two groups change in
 relation to each other.
+
+### Exercise 6
+
+What I want my inaccurate visual to convey is the opposite/misleading
+message that both mask‑mandate and no‑mask counties experienced
+similarly large, dramatic changes in COVID‑19 case rates over time,
+making it seem like the two groups are roughly equivalent in how much
+their situations improved.
+
+### Exercise 7
+
+``` r
+df %>% 
+  mutate(
+    week = lubridate::floor_date(date, unit = "week"),
+    mask_group = if_else(mask_mandate == "Mask",
+                         "Mask mandate counties",
+                         "No mask mandate counties")
+  ) %>% 
+  group_by(week, mask_group) %>% 
+  summarize(mean_cases = mean(rolling_avg), .groups = "drop") %>% 
+  ggplot(aes(x = week,
+             y = mean_cases,
+             fill = mask_group)) +
+  geom_col(width = 5) +
+  facet_wrap(~ mask_group, ncol = 1, scales = "free_y") +
+  labs(
+    x = "Week",
+    y = "Average 7-day rolling cases\n(per 100,000 residents)",
+    title = "Mask mandates sharply reduce COVID-19 case rates over time",
+  ) +
+  scale_fill_manual(values = c("Mask mandate counties" = "red",
+                               "No mask mandate counties" = "blue"),
+                    guide = "none") +
+  theme_minimal(base_size = 12) +
+  theme(
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+![](lab-07_files/figure-gfm/-%20making%20the%20opposite%20visual-1.png)<!-- -->
+
+I needed some help from AI to figure out how to make this a really bad
+representation, but this product is really frustrating, so I think it is
+doing its job!
